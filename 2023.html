@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  
-    <base href="https://birresborn.de/">  
-  
+  <base href="https://birresborn.de/">  
   <title>Birresborn - Eifelgemeinde mit Herz &hearts;</title>
   <link href="css/build.css" rel="stylesheet"> 
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCDbTCiWaswNy5yUVKXD2GOpE84pHahXOg" type="text/javascript"></script>
-  <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
-  <script src='https://www.google.com/recaptcha/api.js?hl=de'></script>
-  <!-- Quelle folgender Scriptblock: http://praxistipps.chip.de/cookie-hinweis-auf-webseite-einfuegen-eu-richtlinie_42445 -->
-  <script type="text/javascript">
-      window.cookieconsent_options = {"message":"Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu erm&ouml;glichen.","dismiss":"Bitte best&auml;tigen!","learnMore":"Mehr Infos","link":null,"theme":"dark-top"};
-  </script> 
-
 </head>
 <body>
     <section class="container">
@@ -22,22 +13,21 @@
                 <h1 id="headline"></h1>
                 <p id="announce"></p> 
                 (Die Maus über das kleine Fenstersymbol ziehen um das Foto zu sehen)<br/>
-                Fotografiert von: <span id="fotoby"></span>
+                Fotografiert von: <span id="fotoby"></span><br/><br/>
+                Alle Bilder auf einmal <a href="https://www.flickr.com/photos/birresborn/albums/72177720312738319">hier im Album</a> ansehen.
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                <div id="map-canvas" style="height: 800px;"></div>
             </div>
-        </div>
-
-
-        <a data-flickr-embed="true" data-header="true" data-footer="true" href="https://www.flickr.com/photos/birresborn/albums/72177720312738319" title="Adventsfenster 2023"><img src="https://live.staticflickr.com/65535/53335772043_4bba6738a2_z.jpg" width="800" height="600" alt="Adventsfenster 2023"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+        </div>      
     </section>
 
     <script src="js/externals.js"></script>
     <script src="js/build.js"></script>
-<script>
+
+    <script>
 function initialize() {
 
    var calendar = [
