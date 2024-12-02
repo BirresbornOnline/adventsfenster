@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <base href="https://birresborn.de/">  
+  <title>Birresborn - Eifelgemeinde mit Herz &hearts;</title>
+  <link href="css/build.css" rel="stylesheet"> 
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCDbTCiWaswNy5yUVKXD2GOpE84pHahXOg" type="text/javascript"></script>
+</head>
+<body>
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="headline"></h1>
+                <p id="announce"></p> 
+                (Die Maus über das kleine Fenstersymbol ziehen um das Foto zu sehen)<br/>
+                Fotografiert von: <span id="fotoby"></span><br/><br/>
+                Alle Bilder auf einmal <a href="https://www.flickr.com/photos/birresborn/albums/72177720312738319">hier im Album</a> ansehen.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+               <div id="map-canvas" style="height: 800px;"></div>
+            </div>
+        </div>      
+    </section>
+
+    <script src="js/externals.js"></script>
+    <script src="js/build.js"></script>
+
+  <!--
+
+  [url=https://flic.kr/p/2qxwTDG][img][/img][/url][url=https://flic.kr/p/2qxwTDG]Tag 01[/url] by [url=https://www.flickr.com/photos/birresborn/]Gemeinde Birresborn[/url], on Flickr
+  [url=https://flic.kr/p/2qxDGo4][img][/img][/url][url=https://flic.kr/p/2qxDGo4]Tag 02[/url] by [url=https://www.flickr.com/photos/birresborn/]Gemeinde Birresborn[/url], on Flickr
+  -->
+
+
+  
+    <script>
+function initialize() {
+
+var calendar = [
+  {
+    'pos'     : new google.maps.LatLng(50.177410611996656, 6.6264782777195075),
+    'name'    : 'Familie Preis',
+    'address' : 'Gerolsteiner Strasse 20a',
+    'photo'   : 'https://live.staticflickr.com/65535/54178093462_72c734c270.jpg',
+    'photoBy' : 'Rudi Benz'
+  }, 
+  {
+    'pos'     : new google.maps.LatLng(50.1752951091084, 6.6249406441505005),
+    'name'    : 'Daniela Peters',
+    'address' : 'M&uuml;rlenbacher Stra&szlig;e 6',
+    'photo'   : 'https://live.staticflickr.com/65535/54179421335_43aa30f0e0.jpg',
+    'photoBy' : 'Rudi Benz'
+  }
+];
+
+
+  var myLatlng = new google.maps.LatLng(50.17581834574783, 6.625217908998995); // Ortsmitte um die Karte zu zentrieren
+  var mapOptions = {
+    zoom: 17,
+    center: myLatlng,
+    scrollwheel: false
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  // [url=https://flic.kr/p/2pfSb3h][img]https://live.staticflickr.com/65535/53333118524_b8066cf4ba_t.jpg[/img][/url][url=https://flic.kr/p/2pfSb3h]Adventsfenstericon[/url] by [url=https://www.flickr.com/photos/birresborn/]Gemeinde Birresborn[/url], on Flickr
+
+  let headline = document.getElementById('headline');
+  let familie = document.getElementById('announce');
+  let adresse = document.getElementById('addresse');
+  let fensterfoto = document.getElementById('fensterfoto');
+ 
+  let dateToday = new Date();
+  
+  let runTo = calendar.length;
+  if (dateToday.getMonth() == 11) { //-- December is 11, stupid JS starts with January as 0
+     runTo = dateToday.getDate();
+  }
+  
+
+
+  function setWindowMarker(d) {
+    map.panTo(calendar[d].pos);
+    var marker = new google.maps.Marker({
+        icon: 'https://live.staticflickr.com/65535/53333118524_b8066cf4ba_t.jpg',
+        position: calendar[d].pos,
+        map: map,
+        title: calendar[d].name,
+        animation: google.maps.Animation.DROP
+    });
+
+    google.maps.event.addListener(marker, 'mouseover', function(event) {
+          this.setIcon(calendar[d].photo);
+    });
+    google.maps.event.addListener(marker, 'mouseout', function(event) {
+          this.setIcon('https://live.staticflickr.com/65535/53333118524_b8066cf4ba_t.jpg');
+    });
+
+
+    headline.innerHTML = (d+1) + ". Adventsfenster";
+    familie.innerHTML = calendar[d].name + ' - ' + calendar[d].address;
+    fotoby.innerHTML = calendar[d].photoBy;
+   }
+   
+  for (let c=0; c<runTo; c++) {
+    setTimeout(() => {
+        setWindowMarker(c);
+    }, c * 2000);
+  }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    </script>
+  </body>
+</html>
