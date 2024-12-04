@@ -241,11 +241,6 @@ function initialize() {
   let dateToday = new Date();
   
   let runTo = calendar.length;
-  if (dateToday.getMonth() == 11) { //-- December is 11, stupid JS starts with January as 0
-     runTo = dateToday.getDate();
-  }
-  
-
 
   function setWindowMarker(d) {
     map.panTo(calendar[d].pos);
