@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <base href="https://birresborn.de/">  
+  <title>Birresborn - Eifelgemeinde mit Herz &hearts;</title>
+  <link href="css/build.css" rel="stylesheet"> 
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCDbTCiWaswNy5yUVKXD2GOpE84pHahXOg" type="text/javascript"></script>
+</head>
+<body>
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="headline"></h1>
+                <p id="announce"></p> 
+                (Die Maus über das kleine Fenstersymbol ziehen um das Foto zu sehen)<br/>
+                Fotografiert von: <span id="fotoby"></span><br/><br/>
+                Alle Bilder auf einmal <a href="https://www.flickr.com/photos/birresborn/albums/72177720322323448">hier im Album</a> ansehen.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+               <div id="map-canvas" style="height: 800px;"></div>
+            </div>
+        </div>      
+    </section>
+
+    <script src="js/externals.js"></script>
+    <script src="js/build.js"></script>
+  
+    <script>
+function initialize() {
+
+var calendar = [
+  {
+    'pos'     : new google.maps.LatLng(50.177410611996656, 6.6264782777195075),
+    'name'    : 'Familie Preis',
+    'address' : 'Gerolsteiner Strasse 20a',
+    'photo'   : 'https://live.staticflickr.com/65535/54178093462_72c734c270.jpg',
+    'photoBy' : 'Rudi Benz'
+  }, 
+  {
+    'pos'     : new google.maps.LatLng(50.1752951091084, 6.6249406441505005),
+    'name'    : 'Daniela Peters',
+    'address' : 'M&uuml;rlenbacher Stra&szlig;e 6',
+    'photo'   : 'https://live.staticflickr.com/65535/54179421335_43aa30f0e0.jpg',
+    'photoBy' : 'Rudi Benz'
+  },
+  {
+    'pos'     : new google.maps.LatLng(50.17709564526966, 6.6261124199518795),
+    'name'    : 'Familie Bitzigeio',
+    'address' : 'Gerolsteiner Strasse 18',
+    'photo'   : 'https://live.staticflickr.com/65535/54180264947_6da180e75f.jpg',
+    'photoBy' : 'Rudi Benz'
+  },
+  {
+    'pos'     : new google.maps.LatLng(50.19056361608636, 6.616951182514266),
+    'name'    : 'Familie Schifferings',
+    'address' : 'Vulkanhof',
+    'photo'   : 'https://live.staticflickr.com/65535/54186286090_67f386dd38.jpg',
+    'photoBy' : 'Rudi Benz'  
+  },  
+  {
+    'pos'     : new google.maps.LatLng(50.176767076635386, 6.6229655937149445),
+    'name'    : 'Familie Lorig',
+    'address' : 'Birkenweg 30',
+    'photo'   : 'https://live.staticflickr.com/65535/54186130229_5a4bc7edca.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },  
+  {
+    'pos'     : new google.maps.LatLng(50.18062299231784, 6.6254087419318815),
+    'name'    : 'Familie Schnieder',
+    'address' : 'B&uuml;desheimer Stra&szlig;e 38',
+    'photo'   : 'https://live.staticflickr.com/65535/54200999067_e0b1d3570b.jpg',
+    'photoBy' : 'Diane Schnieder' 
+  },   
+  {
+    'pos'     : new google.maps.LatLng(50.17550476669239, 6.62444337238004),
+    'name'    : 'Malteser Jugend',
+    'address' : 'Altes Rathaus',
+    'photo'   : 'https://live.staticflickr.com/65535/54202325610_92d550cfcd.jpg',
+    'photoBy' : 'Andrea Bitzigeio' 
+  },   
+  {
+    'pos'     : new google.maps.LatLng(50.177612610594956, 6.630089192071052),
+    'name'    : 'Familie Schlösser',
+    'address' : 'Michelbacher Stra&szlig;e 8',
+    'photo'   : 'https://live.staticflickr.com/65535/54202334735_8cdc2167cd.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },   
+  {
+    'pos'     : new google.maps.LatLng(50.17625786264458, 6.623147807409502),
+    'name'    : 'Familie Toma',
+    'address' : 'Kopper Stra&szlig;e 22',
+    'photo'   : 'https://live.staticflickr.com/65535/54202334725_d14822e678.jpg',
+    'photoBy' : 'Rudi Benz' 
+  }, 
+  {
+    'pos'     : new google.maps.LatLng(50.17421317744519, 6.624981297160603),
+    'name'    : 'Familie Dehnert',
+    'address' : 'M&uuml;rlenbacher Stra&szlig;e 9',
+    'photo'   : 'https://live.staticflickr.com/65535/54202334855_c8b8613523.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },   
+  {
+    'pos'     : new google.maps.LatLng(50.17561877393461, 6.618607422904403),
+    'name'    : 'Familie Hoffmann / Kemen',
+    'address' : 'Im Steinreich 30',
+    'photo'   : 'https://live.staticflickr.com/65535/54202151208_0d5ba61fd3.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },     
+  {
+    'pos'     : new google.maps.LatLng(50.17456636534942, 6.624300448624867),
+    'name'    : 'Familie Thieltges',
+    'address' : 'Br&uuml;ckenstra&szlig;e 2 ',
+    'photo'   : 'https://live.staticflickr.com/65535/54202170789_3b0468b020.jpg',
+    'photoBy' : 'Alex Thieltges' 
+  },  
+  {
+    'pos'     : new google.maps.LatLng(50.180801409620855, 6.6250492053497645),
+    'name'    : 'Familie Monix / Herscheid',
+    'address' : 'B&uumldesheimer Stra&szlig;e 15',
+    'photo'   : 'https://live.staticflickr.com/65535/54202170789_3b0468b020.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },    
+  {
+    'pos'     : new google.maps.LatLng(50.17679656987223, 6.628551034050398),
+    'name'    : 'Jugendfeuerwehr',
+    'address' : 'Feuerwehrhaus',
+    'photo'   : 'https://live.staticflickr.com/65535/54218932934_f2722d028f_b.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },    
+  {
+    'pos'     : new google.maps.LatLng(50.17823228499156, 6.622417057661863),
+    'name'    : 'Familie Simonis',
+    'address' : 'In der Kehrt 15',
+    'photo'   : 'https://live.staticflickr.com/65535/54217795522_c10ce58719_b.jpg',
+    'photoBy' : 'Rudi Benz'
+  },  
+  {  
+    'pos'     : new google.maps.LatLng(50.174802935158944, 6.624434754806541),
+    'name'    : 'Familie Bleses',
+    'address' : 'M&uuml;rlenbacher Stra&szlig;e 10',
+    'photo'   : 'https://live.staticflickr.com/65535/54217795497_6fc958cb02_b.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },  
+  {  
+    'pos'     : new google.maps.LatLng(50.176983645297994, 6.624105313183801),
+    'name'    : 'Familie Wolters',
+    'address' : 'B&uuml;desheimer Stra&szlig;e 1',
+    'photo'   : 'https://live.staticflickr.com/65535/54218710461_ad590331f2_k.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },  
+  {  
+    'pos'     : new google.maps.LatLng(50.17358852313214, 6.620574260805694),
+    'name'    : 'Familie Bleses',
+    'address' : 'In der Noll 13',
+    'photo'   : 'https://live.staticflickr.com/65535/54218931408_966c8fcad7_k.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },
+  {
+    'pos'     : new google.maps.LatLng(50.17764223899639, 6.624982933647776),
+    'name'    : 'Grundschule Birresborn',
+    'address' : 'Neustra&szlig;e 7',
+    'photo'   : 'https://live.staticflickr.com/65535/54218933049_93216cb03a_k.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },
+  {  
+    'pos'     : new google.maps.LatLng(50.17957256539573, 6.624497297840949),
+    'name'    : 'Familie Maring',
+    'address' : 'B&uuml;desheimer Stra&szlig;e 30',
+    'photo'   : 'https://live.staticflickr.com/65535/54218931373_95d8e84e37_k.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },  
+  {  
+    'pos'     : new google.maps.LatLng(50.174440403140785, 6.624996188765442),
+    'name'    : 'Dorfverein',
+    'address' : 'Grabenstrasse',
+    'photo'   : 'https://live.staticflickr.com/65535/54221282898_657e74e617_h.jpg',
+    'photoBy' : 'Christiane Bleses' 
+  }, 
+  {
+    'pos'     : new google.maps.LatLng(50.18198987655689, 6.630953780862615),
+    'name'    : 'Familie Becker',
+    'address' : 'Kalkweg 4',
+    'photo'   : 'https://live.staticflickr.com/65535/54221451675_817bba1018_k.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },
+  {
+    'pos'     : new google.maps.LatLng(50.176513644993655, 6.62336951562305),
+    'name'    : 'Familie B&ouml;r&ouml;cz Stiehl',
+    'address' : 'Kopper Stra&szlig;e 18',
+    'photo'   : 'https://live.staticflickr.com/65535/54234212649_a3d871bfd5_k.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },  
+  {
+    'pos'     : new google.maps.LatLng(50.17972426581365, 6.623953233679761),
+    'name'    : 'Familie Wadle',
+    'address' : 'Birkenweg 1',
+    'photo'   : 'https://live.staticflickr.com/65535/54234214424_f92376c68d_k.jpg',
+    'photoBy' : 'Rudi Benz' 
+  },  
+
+  
+];
+
+
+  var myLatlng = new google.maps.LatLng(50.17581834574783, 6.625217908998995); // Ortsmitte um die Karte zu zentrieren
+  var mapOptions = {
+    zoom: 17,
+    center: myLatlng,
+    scrollwheel: false
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  let headline = document.getElementById('headline');
+  let familie = document.getElementById('announce');
+  let adresse = document.getElementById('addresse');
+  let fensterfoto = document.getElementById('fensterfoto');
+ 
+  let dateToday = new Date();
+  
+  let runTo = calendar.length;
+  if (dateToday.getMonth() == 11) { //-- December is 11, stupid JS starts with January as 0
+     runTo = dateToday.getDate();
+  }
+  
+
+
+  function setWindowMarker(d) {
+    map.panTo(calendar[d].pos);
+    var marker = new google.maps.Marker({
+        icon: 'https://live.staticflickr.com/65535/53333118524_b8066cf4ba_t.jpg',
+        position: calendar[d].pos,
+        map: map,
+        title: calendar[d].name,
+        animation: google.maps.Animation.DROP
+    });
+
+    google.maps.event.addListener(marker, 'mouseover', function(event) {
+          this.setIcon(calendar[d].photo);
+    });
+    google.maps.event.addListener(marker, 'mouseout', function(event) {
+          this.setIcon('https://live.staticflickr.com/65535/53333118524_b8066cf4ba_t.jpg');
+    });
+
+
+    headline.innerHTML = (d+1) + ". Adventsfenster";
+    familie.innerHTML = calendar[d].name + ' - ' + calendar[d].address;
+    fotoby.innerHTML = calendar[d].photoBy;
+   }
+   
+  for (let c=0; c<runTo; c++) {
+    setTimeout(() => {
+        setWindowMarker(c);
+    }, c * 2000);
+  }
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    </script>
+  </body>
+</html>
