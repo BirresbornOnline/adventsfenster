@@ -12,6 +12,38 @@
     <h2>Click on the map to add a marker</h2>
     <div id="map"></div>
 
+
+    <script>
+        var teilnehmer = [
+          { "nr": 1,  "gestalter": "Hotel zur Krone",               "adresse": "Mürlenbacherstraße 1, 54574 Birresborn, Germany", "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 2,  "gestalter": "Praxis Daniela Peters",        "adresse": "Mürlenbacherstraße 6, 54574 Birresborn, Germany", "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 3,  "gestalter": "Familie Wedel",                "adresse": "Mühlenweg 4, 54574 Birresborn, Germany",          "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 4,  "gestalter": "Familie Bleses",               "adresse": "In der Noll 13, 54574 Birresborn, Germany",        "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 5,  "gestalter": "Familie Lala",                 "adresse": "Kalkweg 9, 54574 Birresborn, Germany",             "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 6,  "gestalter": "Kinderkirche",                 "adresse": "Kirche (Weihnachtsmarkt), 54574 Birresborn, Germany","latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 7,  "gestalter": "Familie Simonis",              "adresse": "In der Kehrt 15, 54574 Birresborn, Germany",       "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 8,  "gestalter": "Familie Schlösser",            "adresse": "Michelbacherstraße 8, 54574 Birresborn, Germany",  "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 9,  "gestalter": "Familie Thieltges",            "adresse": "Brückenstraße 2, 54574 Birresborn, Germany",       "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 10, "gestalter": "Familie Bleses",               "adresse": "Mürlenbacherstraße 10, 54574 Birresborn, Germany", "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 11, "gestalter": "Familie Scharwat",             "adresse": "Vulkanstraße 4, 54574 Birresborn, Germany",        "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 12, "gestalter": "Grundschule Birresborn",       "adresse": "Neustraße 7, 54574 Birresborn, Germany",          "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 13, "gestalter": "Familie Harings",              "adresse": "Maibaumstraße 2, 54574 Birresborn, Germany",      "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 14, "gestalter": "Familie Lorig",                "adresse": "Birkenweg 30, 54574 Birresborn, Germany",         "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 15, "gestalter": "Familie Rusavskyi",            "adresse": "Kopperstraße 1, 54574 Birresborn, Germany",       "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 16, "gestalter": "Kindertagesstätte Birresborn", "adresse": "Neustraße 7a, 54574 Birresborn, Germany",         "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 17, "gestalter": "Familie Halfen Dorantes",      "adresse": "Kalkweg 8, 54574 Birresborn, Germany",            "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 18, "gestalter": "Familie Wolters",              "adresse": "Büdesheimerstraße 1, 54574 Birresborn, Germany",  "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 19, "gestalter": "Musikverein Birresborn",       "adresse": "im alten Amt, 54574 Birresborn, Germany",         "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 20, "gestalter": "Familie Herscheid",            "adresse": "Büdesheimerstraße 15, 54574 Birresborn, Germany", "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 21, "gestalter": "Familie Langmann",             "adresse": "Maibaumstraße 4, 54574 Birresborn, Germany",      "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 22, "gestalter": "Familie Hoogeweij",            "adresse": "Im Steinreich 48, 54574 Birresborn, Germany",     "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 23, "gestalter": "Familie Böröcz-Stiehl",        "adresse": "Kopperstraße 18, 54574 Birresborn, Germany",      "latitude": 50.1833, "longitude": 6.6333 },
+          { "nr": 24, "gestalter": "Familie Langmann",             "adresse": "Maibaumstraße 4, 54574 Birresborn, Germany",      "latitude": 50.1833, "longitude": 6.6333 }
+        ];
+    </script>
+    
+    
+    
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -31,6 +63,8 @@
                 .bindPopup('You clicked at ' + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5))
                 .openPopup();
         });
+
+        
     </script>
 </body>
 </html>
