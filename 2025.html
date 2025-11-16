@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>OpenStreetMap with Leaflet</title>
+  <base href="https://birresborn.de/">  
+  <title>Birresborn - Eifelgemeinde mit Herz &hearts;</title>
+  <link href="css/build.css" rel="stylesheet"> 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
@@ -9,36 +11,62 @@
     </style>
 </head>
 <body>
-    <h2>Adventsfenster 2025</h2>
-    <div id="map"></div>
 
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="headline">Adventsfenster 2025</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="map"></div>
+            </div>
+        </div>      
+        <div class="row">
+            <div class="col-md-12">
+
+            <table class="table table-striped" id="tns">
+               <tr>
+                <th>Tag</th>
+                <th>Gestaltung</th>
+                <th>Adresse</th>
+               </tr>
+            </table>
+
+            </div>
+        </div>      
+    </section>
+
+    <script src="js/externals.js"></script>
+    <script src="js/build.js"></script>    
 
     <script>
         var teilnehmer = [
-          { "nr": 1,  "gestalter": "Hotel zur Krone",              "adresse": "Mürlenbacherstraße 1, 54574 Birresborn, Germany", "latitude": 50.17548120390297, "longitude": 6.625379405097125 },
-          { "nr": 2,  "gestalter": "Praxis Daniela Peters",        "adresse": "Mürlenbacherstraße 6, 54574 Birresborn, Germany", "latitude": 50.1752951091084, "longitude": 6.6249406441505005 },
-          { "nr": 3,  "gestalter": "Familie Wedel",                "adresse": "Mühlenweg 4, 54574 Birresborn, Germany",          "latitude": 50.175128324203634, "longitude": 6.623336656268817 },
-          { "nr": 4,  "gestalter": "Familie Bleses",               "adresse": "In der Noll 13, 54574 Birresborn, Germany",        "latitude": 50.17358852313214, "longitude":  6.620574260805694 },
-          { "nr": 5,  "gestalter": "Familie Lala",                 "adresse": "Kalkweg 9, 54574 Birresborn, Germany",             "latitude": 50.18217055250892, "longitude": 6.62958753785332 },
-          { "nr": 6,  "gestalter": "Kinderkirche",                 "adresse": "Kirche (Weihnachtsmarkt), 54574 Birresborn, Germany","latitude": 50.17595316523133, "longitude": 6.625151579327182 },
-          { "nr": 7,  "gestalter": "Familie Simonis",              "adresse": "In der Kehrt 15, 54574 Birresborn, Germany",       "latitude": 50.17823228499156, "longitude": 6.622417057661863 },
-          { "nr": 8,  "gestalter": "Familie Schlösser",            "adresse": "Michelbacherstraße 8, 54574 Birresborn, Germany",  "latitude": 50.177612610594956, "longitude":  6.630089192071052 },
-          { "nr": 9,  "gestalter": "Familie Thieltges",            "adresse": "Brückenstraße 2, 54574 Birresborn, Germany",       "latitude": 50.17456636534942, "longitude": 6.624300448624867 },
-          { "nr": 10, "gestalter": "Familie Bleses",               "adresse": "Mürlenbacherstraße 10, 54574 Birresborn, Germany", "latitude": 50.174802935158944, "longitude": 6.624434754806541 },
-          { "nr": 11, "gestalter": "Familie Scharwat",             "adresse": "Vulkanstraße 4, 54574 Birresborn, Germany",        "latitude": 50.17999306874408, "longitude": 6.621532746028441 },
-          { "nr": 12, "gestalter": "Grundschule Birresborn",       "adresse": "Neustraße 7, 54574 Birresborn, Germany",          "latitude": 50.17764223899639, "longitude": 6.624982933647776 },
-          { "nr": 13, "gestalter": "Familie Harings",              "adresse": "Maibaumstraße 2, 54574 Birresborn, Germany",      "latitude": 50.174003540561436, "longitude": 6.624930701936398 },
-          { "nr": 14, "gestalter": "Familie Lorig",                "adresse": "Birkenweg 30, 54574 Birresborn, Germany",         "latitude": 50.176767076635386, "longitude": 6.6229655937149445 },
-          { "nr": 15, "gestalter": "Familie Rusavskyi",            "adresse": "Kopperstraße 1, 54574 Birresborn, Germany",       "latitude": 50.17557884760297, "longitude": 6.625089303696963 },
-          { "nr": 16, "gestalter": "Kindertagesstätte Birresborn", "adresse": "Neustraße 7a, 54574 Birresborn, Germany",         "latitude": 50.17805131587118, "longitude": 6.625279795420553 },
-          { "nr": 17, "gestalter": "Familie Halfen Dorantes",      "adresse": "Kalkweg 8, 54574 Birresborn, Germany",            "latitude": 50.181433894033155, "longitude": 6.630426143527485 },
-          { "nr": 18, "gestalter": "Familie Wolters",              "adresse": "Büdesheimerstraße 1, 54574 Birresborn, Germany",  "latitude": 50.176983645297994, "longitude": 6.624105313183801 },
-          { "nr": 19, "gestalter": "Musikverein Birresborn",       "adresse": "im alten Amt, 54574 Birresborn, Germany",         "latitude": 50.17552785475061, "longitude": 6.62425372771035 },
-          { "nr": 20, "gestalter": "Familie Herscheid",            "adresse": "Büdesheimerstraße 15, 54574 Birresborn, Germany", "latitude": 50.180813775774986, "longitude": 6.625093252600174 },
-          { "nr": 21, "gestalter": "Familie Langmann",             "adresse": "Maibaumstraße 4, 54574 Birresborn, Germany",      "latitude": 50.17392580102283, "longitude": 6.625347521640691 },
-          { "nr": 22, "gestalter": "Familie Hoogeweij",            "adresse": "Im Steinreich 48, 54574 Birresborn, Germany",     "latitude": 50.17452222080042, "longitude": 6.618770078723812 },
-          { "nr": 23, "gestalter": "Familie Böröcz-Stiehl",        "adresse": "Kopperstraße 18, 54574 Birresborn, Germany",      "latitude": 50.176513644993655, "longitude": 6.62336951562305 },
-          { "nr": 24, "gestalter": "Familie Langmann",             "adresse": "Maibaumstraße 4, 54574 Birresborn, Germany",      "latitude": 50.17392580102283, "longitude": 6.625347521640691 }
+          { "nr": 1,  "gestalter": "Hotel zur Krone",              "adresse": "Mürlenbacherstraße 1", "latitude": 50.17548120390297, "longitude": 6.625379405097125 },
+          { "nr": 2,  "gestalter": "Praxis Daniela Peters",        "adresse": "Mürlenbacherstraße 6", "latitude": 50.1752951091084, "longitude": 6.6249406441505005 },
+          { "nr": 3,  "gestalter": "Familie Wedel",                "adresse": "Mühlenweg 4",          "latitude": 50.175128324203634, "longitude": 6.623336656268817 },
+          { "nr": 4,  "gestalter": "Familie Bleses",               "adresse": "In der Noll 13",        "latitude": 50.17358852313214, "longitude":  6.620574260805694 },
+          { "nr": 5,  "gestalter": "Familie Lala",                 "adresse": "Kalkweg 9",             "latitude": 50.18217055250892, "longitude": 6.62958753785332 },
+          { "nr": 6,  "gestalter": "Kinderkirche",                 "adresse": "Kirche (Weihnachtsmarkt)","latitude": 50.17595316523133, "longitude": 6.625151579327182 },
+          { "nr": 7,  "gestalter": "Familie Simonis",              "adresse": "In der Kehrt 15",       "latitude": 50.17823228499156, "longitude": 6.622417057661863 },
+          { "nr": 8,  "gestalter": "Familie Schlösser",            "adresse": "Michelbacherstraße 8",  "latitude": 50.177612610594956, "longitude":  6.630089192071052 },
+          { "nr": 9,  "gestalter": "Familie Thieltges",            "adresse": "Brückenstraße 2",       "latitude": 50.17456636534942, "longitude": 6.624300448624867 },
+          { "nr": 10, "gestalter": "Familie Bleses",               "adresse": "Mürlenbacherstraße 10", "latitude": 50.174802935158944, "longitude": 6.624434754806541 },
+          { "nr": 11, "gestalter": "Familie Scharwat",             "adresse": "Vulkanstraße 4",        "latitude": 50.17999306874408, "longitude": 6.621532746028441 },
+          { "nr": 12, "gestalter": "Grundschule Birresborn",       "adresse": "Neustraße 7",          "latitude": 50.17764223899639, "longitude": 6.624982933647776 },
+          { "nr": 13, "gestalter": "Familie Harings",              "adresse": "Maibaumstraße 2",      "latitude": 50.174003540561436, "longitude": 6.624930701936398 },
+          { "nr": 14, "gestalter": "Familie Lorig",                "adresse": "Birkenweg 30",         "latitude": 50.176767076635386, "longitude": 6.6229655937149445 },
+          { "nr": 15, "gestalter": "Familie Rusavskyi",            "adresse": "Kopperstraße 1",       "latitude": 50.17557884760297, "longitude": 6.625089303696963 },
+          { "nr": 16, "gestalter": "Kindertagesstätte Birresborn", "adresse": "Neustraße 7a",         "latitude": 50.17805131587118, "longitude": 6.625279795420553 },
+          { "nr": 17, "gestalter": "Familie Halfen Dorantes",      "adresse": "Kalkweg 8",            "latitude": 50.181433894033155, "longitude": 6.630426143527485 },
+          { "nr": 18, "gestalter": "Familie Wolters",              "adresse": "Büdesheimerstraße 1",  "latitude": 50.176983645297994, "longitude": 6.624105313183801 },
+          { "nr": 19, "gestalter": "Musikverein Birresborn",       "adresse": "im alten Amt",         "latitude": 50.17552785475061, "longitude": 6.62425372771035 },
+          { "nr": 20, "gestalter": "Familie Herscheid",            "adresse": "Büdesheimerstraße 15", "latitude": 50.180813775774986, "longitude": 6.625093252600174 },
+          { "nr": 21, "gestalter": "Familie Langmann",             "adresse": "Maibaumstraße 4",      "latitude": 50.17392580102283, "longitude": 6.625347521640691 },
+          { "nr": 22, "gestalter": "Familie Hoogeweij",            "adresse": "Im Steinreich 48",     "latitude": 50.17452222080042, "longitude": 6.618770078723812 },
+          { "nr": 23, "gestalter": "Familie Böröcz-Stiehl",        "adresse": "Kopperstraße 18",      "latitude": 50.176513644993655, "longitude": 6.62336951562305 },
+          { "nr": 24, "gestalter": "Familie Langmann",             "adresse": "Maibaumstraße 4",      "latitude": 50.17392580102283, "longitude": 6.625347521640691 }
         ];
     </script>
     
@@ -50,9 +78,25 @@
         // Initialize the map and set its view to a default location and zoom
         var map = L.map('map').setView([50.178020037798106, 6.6252563400431885], 16); // Birresborn
 
+        const table = document.getElementById("tns");
 
         teilnehmer.forEach((teilnehmer, index) => {
            L.marker([teilnehmer.latitude, teilnehmer.longitude]).addTo(map)
+
+
+            // Neue Zeile erstellen
+            const newRow = table.insertRow();
+
+            // Neue Zellen erstellen
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+
+            // Inhalte setzen
+            cell1.textContent = teilnehmer.nr;
+            cell2.textContent = teilnehmer.gestalter;
+            cell3.textContent = teilnehmer.adresse;
+
         });
 
 
